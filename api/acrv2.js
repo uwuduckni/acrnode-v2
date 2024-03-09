@@ -16,6 +16,10 @@ axios.interceptors.response.use(
 let resclock = []; // Initialize the resclock array
 
 async function repeat(n, username, password) {
+  let timell=new Date().toLocaleString("en-US", {
+      timeZone: "America/Los_Angeles"
+    })
+  console.log('Process Started, Time '+timell)
   try {
     let response = await auth(username, password);
 
@@ -26,6 +30,7 @@ async function repeat(n, username, password) {
       console.log(response.data);
       let timestamp = new Date(); // Get current timestamp
       resclock.push(n); // Push n to the resclock array
+      console.log('Process successfully completed; Timestamp '+timell)
       return { timestamp, resclock }; // Return timestamp and resclock
     }
   } catch(err) {
@@ -72,6 +77,7 @@ async function auth(username, password) {
  let exported = async (event, context) => {
    const username = Netlify.env.get("username")
    const password = Netlify.env.get("password")
+   
   try {
     const result = await repeat(1, username, password); // Call repeat function when the serverless function is invoked
     const time = result.timestamp.toLocaleString("en-US", {
