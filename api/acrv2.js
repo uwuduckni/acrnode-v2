@@ -12,14 +12,12 @@ axios.interceptors.response.use(
   }
 );
 
-const username = process.env.username;
-const password = process.env.password;
 
 let resclock = []; // Initialize the resclock array
 
-async function repeat(n) {
+async function repeat(n, username, password) {
   try {
-    let response = await auth();
+    let response = await auth(username, password);
 
     let token = response.data.token;
     console.log(response.data)
@@ -49,7 +47,7 @@ async function timedBonus(token) {
   return res.data;
 }
 
-async function auth() {
+async function auth(username, password) {
   let payload = {
     email: username,
     password: password,
@@ -71,9 +69,11 @@ async function auth() {
 }
 
 // Export the repeat function to be used as a Netlify function
-exports.handler = async (event, context) => {
+ let exported = async (event, context) => {
+   const username = Netlify.env.get("username")
+   const password = Netlify.env.get("password")
   try {
-    const result = await repeat(1); // Call repeat function when the serverless function is invoked
+    const result = await repeat(1, username, password); // Call repeat function when the serverless function is invoked
     const time = result.timestamp.toLocaleString("en-US", {
       timeZone: "America/Los_Angeles"
     });
@@ -86,3 +86,9 @@ exports.handler = async (event, context) => {
     return { statusCode: 500, body: JSON.stringify({ error: error.message }) };
   }
 };
+
+export default exported
+export const config = {
+  schedule: "*/31 * * * *", 
+  path: "/"
+}
