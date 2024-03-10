@@ -5,9 +5,9 @@ axios.interceptors.response.use(
   error => {
     // Handle error globally
     if (error.response) {
-      console.log("Axios error:", error.response.data);
+      console.warn("Axios error:", error.response.data);
     } else {
-      console.log("Axios error:", error.message);
+      console.warn("Axios error:", error.message);
     }
   }
 );
@@ -29,11 +29,11 @@ async function repeat(n, username, password) {
     if(response){
       let timestamp = new Date(); // Get current timestamp
       resclock.push(n); // Push n to the resclock array
-      console.log('Process successfully completed; Timestamp '+timell)
+      console.warn('Process successfully completed; Timestamp '+timell)
       return { timestamp, resclock }; // Return timestamp and resclock
     }
   } catch(err) {
-    console.log('repeat error', err);
+    console.warn('repeat error', err);
     throw err; // Re-throw the error to handle it in the caller function
   }
 }
