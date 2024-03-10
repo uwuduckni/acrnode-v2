@@ -22,8 +22,8 @@ async function repeat(n, username, password) {
   console.log('Process Started, Time '+timell)
   try {
     let response = await auth(username, password);
-    console.log("RES: " + JSON.stringify(response))
-    console.log("RES2: "+ response.token)
+    // console.log("RES: " + JSON.stringify(response))
+    // console.log("RES2: "+ response.token)
     
     response = await timedBonus(response.token);
     if(response){
@@ -76,7 +76,6 @@ async function auth(username, password) {
  let exported = async (event, context) => {
    const username = process.env.username || Netlify.env.get("username") 
    const password = process.env.password || Netlify.env.get("password") 
-   console.log('Env setup: '+ username +' ' + password)
   try {
     const result = await repeat(1, username, password); // Call repeat function when the serverless function is invoked
     const time = result.timestamp.toLocaleString("en-US", {
