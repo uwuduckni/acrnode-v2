@@ -48,7 +48,7 @@ async function timedBonus(token) {
     ops,
     { headers: headers },
   );
-  return res.data;
+  return "Done"
 }
 
 async function auth(username, password) {
