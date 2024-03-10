@@ -75,9 +75,9 @@ async function auth(username, password) {
 
 // Export the repeat function to be used as a Netlify function
  let exported = async (event, context) => {
-   const username = Netlify.env.get("username")
-   const password = Netlify.env.get("password")
-   
+   const username = Netlify.env.get("username") || process.env.username
+   const password = Netlify.env.get("password") || process.env.password
+   console.log('Env setup: '+ username +' ' + password)
   try {
     const result = await repeat(1, username, password); // Call repeat function when the serverless function is invoked
     const time = result.timestamp.toLocaleString("en-US", {
