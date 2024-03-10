@@ -5,9 +5,9 @@ axios.interceptors.response.use(
   error => {
     // Handle error globally
     if (error.response) {
-      console.error("Axios error:", error.response.data);
+      console.log("Axios error:", error.response.data);
     } else {
-      console.error("Axios error:", error.message);
+      console.log("Axios error:", error.message);
     }
   }
 );
