@@ -93,5 +93,5 @@ async function auth(username, password) {
 
 export default exported
 export const config = {
-  schedule: "*/1 * * * *"
+  schedule: "*/31 * * * *"
 }
