@@ -22,7 +22,7 @@ async function repeat(n, username, password) {
   console.log('Process Started, Time '+timell)
   try {
     let response = await auth(username, password);
-
+    console.log("RES: " + response)
     let token = response.data.token;
     console.log(response.data)
     response = await timedBonus(token);
