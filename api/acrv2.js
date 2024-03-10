@@ -23,11 +23,9 @@ async function repeat(n, username, password) {
   try {
     let response = await auth(username, password);
     console.log("RES: " + JSON.stringify(response))
-    let token = response.data.token;
-    console.log(response.data)
+    let token = response.token;
     response = await timedBonus(token);
     if(response){
-      console.log(response.data);
       let timestamp = new Date(); // Get current timestamp
       resclock.push(n); // Push n to the resclock array
       console.log('Process successfully completed; Timestamp '+timell)
