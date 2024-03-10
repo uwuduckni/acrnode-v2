@@ -83,12 +83,12 @@ async function auth(username, password) {
       timeZone: "America/Los_Angeles"
     });
     const responseMessage = `Bot status: Active<br>Last request: ${time}<br>[${result.resclock.join(', ')}]`;
-    return {
+    return Response.json({
       statusCode: 200,
       body: responseMessage,
-    };
+    });
   } catch (error) {
-    return { statusCode: 500, body: JSON.stringify({ error: error.message }) };
+    return Response.json({ statusCode: 500, body: JSON.stringify({ error: error.message }) });
   }
 };
 
