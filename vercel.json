@@ -8,11 +8,5 @@
       "src": "/(.*)",
       "dest": "/index.js"
     }
-  ],
-  "crons":[
-    {
-      "path": "/api/acrv2",
-      "schedule": "*/31 * * * *"
-    }
   ]
 }
